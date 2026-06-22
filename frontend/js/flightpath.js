@@ -33,13 +33,13 @@ async function drawPath(flight) {
     try {
         const res = await fetch(`/tracks/${flight.icao24}`)
         const data = await res.json()
-        if (!data.path?.length) return
+if (!data.path?.length) return
 
         const coords = data.path.map(p => [p.lat, p.lon])
         const track = L.polyline(coords, {
-            color: '#93c5fd',
-            weight: 2,
-            opacity: 0.7,
+            color: '#f59e0b',
+            weight: 2.5,
+            opacity: 0.9,
         }).addTo(map)
         layers.push(track)
     } catch (e) {
