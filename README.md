@@ -9,11 +9,12 @@ A local flight tracker that actually looks good. Runs entirely on your machine �
 - Shows every flight currently in the air, worldwide
 - Click any plane to see altitude, speed, heading, route, and aircraft type
 - Draws the actual flight path the plane has flown + a predicted line ahead
-- Updates every 10 seconds automatically
+- Updates every 15 seconds automatically
 - Search by callsign to jump straight to a flight
+- Weather radar overlay (precipitation)
 - Dark and light mode
 
-Data comes from the [OpenSky Network](https://opensky-network.org/) (free, no key needed) and [adsbdb](https://www.adsbdb.com/) for route and aircraft info.
+Data comes from the [OpenSky Network](https://opensky-network.org/) for live flights, [adsbdb](https://www.adsbdb.com/) for route and aircraft info, and [RainViewer](https://www.rainviewer.com/) for weather radar.
 
 ---
 
@@ -29,10 +30,32 @@ python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 pip install -r requirements.txt
+```
+
+Before starting, create a `.env` file in the project root (see below), then:
+
+```bash
 uvicorn backend.main:app --reload
 ```
 
-Then open `http://localhost:8000` in your browser.
+Open `http://localhost:8000` in your browser.
+
+---
+
+## OpenSky credentials
+
+Without an account, OpenSky limits you to around 400 requests per day. If you run Zephyr for a while and flights stop showing up, you've likely hit that limit — it resets at midnight UTC.
+
+To get 10x more requests, sign up for a free account at [opensky-network.org](https://opensky-network.org/). Then create a `.env` file in the project root:
+
+```
+OPENSKY_USER=your_username
+OPENSKY_PASS=your_password
+```
+
+The `.env` file is gitignored so your credentials will never be pushed to GitHub. Each person who clones the repo needs to create their own `.env`.
+
+> If you're hitting rate limits and want to test on a different machine — just clone the repo there and set up a fresh `.env`. Rate limits are per IP, so a different network will work immediately.
 
 ---
 
@@ -51,7 +74,9 @@ Then open `http://localhost:8000` in your browser.
 - Amber line = where it has actually been (last hour from OpenSky)
 - Dashed blue line = predicted path based on current heading and speed
 
-**Theme** — hit the ☀️ button in the top right to switch between dark and light mode.
+**Weather radar** — hit the 🌧️ button to toggle precipitation radar over the map.
+
+**Theme** — hit the ☀️ button to switch between dark and light mode.
 
 ---
 
@@ -68,3 +93,4 @@ Coverage is best over Europe and North America where there are more ADS-B ground
 - Vanilla JS
 - OpenSky Network API
 - adsbdb API
+- RainViewer API

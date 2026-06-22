@@ -1,7 +1,11 @@
 import time
+import os
 import httpx
 from typing import List
+from dotenv import load_dotenv
 from ..models.flight import Flight
+
+load_dotenv()
 
 OPENSKY_URL = "https://opensky-network.org/api/states/all"
 CACHE_TTL = 15
@@ -39,7 +43,10 @@ async def fetch_flights() -> List[Flight]:
         return _cache["data"]
 
     try:
-        async with httpx.AsyncClient(timeout=15.0) as client:
+        user = os.getenv("OPENSKY_USER")
+        passwd = os.getenv("OPENSKY_PASS")
+        auth = (user, passwd) if user and passwd else None
+        async with httpx.AsyncClient(timeout=15.0, auth=auth) as client:
             res = await client.get(OPENSKY_URL)
             if res.status_code == 429:
                 print("opensky rate limited, backing off 60s")
