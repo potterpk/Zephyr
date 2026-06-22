@@ -70,6 +70,16 @@ html, body {
     display: block;
 }
 
+#theme-toggle {
+    margin-left: auto;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
 .hidden {
     display: none !important;
 }

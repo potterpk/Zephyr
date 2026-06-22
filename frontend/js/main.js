@@ -2,6 +2,7 @@ import map from './map.js'
 import { loadFlights } from './flights.js'
 import { renderFlights } from './markers.js'
 import { closePanel } from './panels.js'
+import './theme.js'
 
 window.closePanel = closePanel
 
