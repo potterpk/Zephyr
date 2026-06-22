@@ -70,9 +70,12 @@ function openPanel(f) {
             return
         }
         el.innerHTML = `
-            <span class="meta-val">${route.departure ?? '?'}</span>
-            <span style="color:var(--muted)"> → </span>
-            <span class="meta-val">${route.destination ?? '?'}</span>
+            <div style="margin-bottom:4px">
+                <span class="meta-val">${route.departure ?? '?'}</span>
+                <span style="color:var(--muted)"> → </span>
+                <span class="meta-val">${route.destination ?? '?'}</span>
+            </div>
+            <div style="color:var(--muted);font-size:11px">${route.departure_name ?? ''} → ${route.destination_name ?? ''}</div>
         `
     })
 }
