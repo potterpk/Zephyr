@@ -12,12 +12,24 @@ function vicon(rate) {
     return '<span style="color:var(--muted)">▬</span>'
 }
 
+async function fetchRoute(callsign) {
+    if (!callsign) return null
+    try {
+        const res = await fetch(`/routes/${callsign}`)
+        return await res.json()
+    } catch {
+        return null
+    }
+}
+
 function openPanel(f) {
     drawPath(f)
     panel.innerHTML = `
         <button class="panel-close" onclick="closePanel()">✕</button>
         <div class="panel-callsign">${f.callsign ?? f.icao24}</div>
         <div class="panel-country">${f.origin_country ?? 'Unknown'}</div>
+        <div class="panel-divider"></div>
+        <div id="route-info" style="font-size:12px;color:var(--muted);margin-bottom:10px">fetching route...</div>
         <div class="panel-divider"></div>
         <div class="panel-stats">
             <div class="stat wide">
@@ -49,6 +61,20 @@ function openPanel(f) {
         </div>
     `
     panel.classList.remove('hidden')
+
+    fetchRoute(f.callsign).then(route => {
+        const el = document.getElementById('route-info')
+        if (!el) return
+        if (!route?.departure && !route?.destination) {
+            el.textContent = 'route unknown'
+            return
+        }
+        el.innerHTML = `
+            <span class="meta-val">${route.departure ?? '?'}</span>
+            <span style="color:var(--muted)"> → </span>
+            <span class="meta-val">${route.destination ?? '?'}</span>
+        `
+    })
 }
 
 function closePanel() {
