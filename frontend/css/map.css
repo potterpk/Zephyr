@@ -1,0 +1,39 @@
+#map {
+    flex: 1;
+    width: 100%;
+    background: #060b14;
+}
+
+.leaflet-container {
+    background: #060b14;
+    font-family: system-ui, sans-serif;
+}
+
+.leaflet-tile-pane {
+    filter: brightness(0.85) saturate(0.6) hue-rotate(190deg);
+}
+
+.leaflet-control-zoom {
+    border: 1px solid var(--border) !important;
+    background: var(--surface) !important;
+}
+
+.leaflet-control-zoom a {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: var(--border) !important;
+}
+
+.leaflet-control-attribution {
+    background: rgba(10, 14, 26, 0.7) !important;
+    color: var(--muted) !important;
+    font-size: 10px;
+}
+
+.leaflet-control-attribution a {
+    color: var(--muted) !important;
+}
