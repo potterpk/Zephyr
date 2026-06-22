@@ -12,5 +12,5 @@ async function refresh() {
 }
 
 export function startUpdater() {
-    setInterval(refresh, 10000)
+    setInterval(refresh, 15000)
 }

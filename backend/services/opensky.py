@@ -4,9 +4,10 @@ from typing import List
 from ..models.flight import Flight
 
 OPENSKY_URL = "https://opensky-network.org/api/states/all"
-CACHE_TTL = 10
+CACHE_TTL = 15
+BACKOFF_TTL = 60
 
-_cache = {"data": [], "ts": 0}
+_cache = {"data": [], "ts": 0, "backoff_until": 0}
 
 
 def _parse(state: list):
@@ -34,10 +35,16 @@ async def fetch_flights() -> List[Flight]:
     now = time.time()
     if now - _cache["ts"] < CACHE_TTL and _cache["data"]:
         return _cache["data"]
+    if now < _cache["backoff_until"]:
+        return _cache["data"]
 
     try:
         async with httpx.AsyncClient(timeout=15.0) as client:
             res = await client.get(OPENSKY_URL)
+            if res.status_code == 429:
+                print("opensky rate limited, backing off 60s")
+                _cache["backoff_until"] = now + BACKOFF_TTL
+                return _cache["data"]
             res.raise_for_status()
             states = res.json().get("states") or []
     except Exception as e:
