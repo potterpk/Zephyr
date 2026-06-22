@@ -14,6 +14,15 @@
     --topbar-h: 52px;
 }
 
+[data-theme="light"] {
+    --bg: #e8edf5;
+    --surface: #ffffff;
+    --border: #d1d8e4;
+    --accent: #2563eb;
+    --text: #0f172a;
+    --muted: #64748b;
+}
+
 html, body {
     height: 100%;
     background: var(--bg);
