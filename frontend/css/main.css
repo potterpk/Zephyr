@@ -70,6 +70,26 @@ html, body {
     display: block;
 }
 
+#search {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    color: var(--text);
+    font-size: 13px;
+    width: 180px;
+    outline: none;
+    margin-left: auto;
+}
+
+#search:focus {
+    border-color: var(--accent);
+}
+
+#search::placeholder {
+    color: var(--muted);
+}
+
 #theme-toggle {
     margin-left: auto;
     background: none;
