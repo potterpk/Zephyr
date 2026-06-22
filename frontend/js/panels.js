@@ -1,3 +1,5 @@
+import { drawPath, clearPath } from './flightpath.js'
+
 const panel = document.getElementById('flight-panel')
 
 const toKnots = v => Math.round(v * 1.944)
@@ -11,6 +13,7 @@ function vicon(rate) {
 }
 
 function openPanel(f) {
+    drawPath(f)
     panel.innerHTML = `
         <button class="panel-close" onclick="closePanel()">✕</button>
         <div class="panel-callsign">${f.callsign ?? f.icao24}</div>
@@ -51,6 +54,7 @@ function openPanel(f) {
 function closePanel() {
     panel.classList.add('hidden')
     panel.innerHTML = ''
+    clearPath()
 }
 
 export { openPanel, closePanel }
