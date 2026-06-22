@@ -52,6 +52,15 @@ html, body {
     color: var(--muted);
 }
 
+.plane-marker {
+    cursor: pointer;
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.8));
+}
+
+.plane-marker svg {
+    display: block;
+}
+
 .hidden {
     display: none !important;
 }
