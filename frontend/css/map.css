@@ -2,6 +2,7 @@
     flex: 1;
     width: 100%;
     background: #060b14;
+    transition: background 0.3s;
 }
 
 .leaflet-container {
@@ -9,8 +10,18 @@
     font-family: system-ui, sans-serif;
 }
 
+[data-theme="light"] #map,
+[data-theme="light"] .leaflet-container {
+    background: #e8edf5;
+}
+
 .leaflet-tile-pane {
     filter: brightness(0.85) saturate(0.6) hue-rotate(190deg);
+    transition: filter 0.3s;
+}
+
+[data-theme="light"] .leaflet-tile-pane {
+    filter: none;
 }
 
 .leaflet-control-zoom {
