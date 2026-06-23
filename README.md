@@ -74,7 +74,7 @@ The `.env` file is gitignored so your credentials will never be pushed to GitHub
 - Amber line = where it has actually been (last hour from OpenSky)
 - Dashed blue line = predicted path based on current heading and speed
 
-**Weather radar** — hit the 🌧️ button to toggle precipitation radar over the map.
+**Weather radar** — hit the 🌧️ button to toggle precipitation radar over the map it won't work if you zoon in too much.
 
 **Theme** — hit the ☀️ button to switch between dark and light mode.
 
