@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
 from ..services.opensky import fetch_flights
 
@@ -18,6 +18,5 @@ async def get_flight(icao24: str):
     flights = await fetch_flights()
     match = next((f for f in flights if f.icao24 == icao24), None)
     if not match:
-        from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="flight not found")
     return match
