@@ -4,6 +4,7 @@ const panel = document.getElementById('flight-panel')
 
 const toKnots = v => Math.round(v * 1.944)
 const toFt = m => Math.round(m * 3.281).toLocaleString()
+const esc = s => s?.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') ?? ''
 
 function vicon(rate) {
     if (rate == null) return ''
@@ -35,8 +36,8 @@ function openPanel(f) {
     drawPath(f)
     panel.innerHTML = `
         <button class="panel-close" onclick="closePanel()">✕</button>
-        <div class="panel-callsign">${f.callsign ?? f.icao24}</div>
-        <div class="panel-country">${f.origin_country ?? 'Unknown'}</div>
+        <div class="panel-callsign">${esc(f.callsign) || f.icao24}</div>
+        <div class="panel-country">${esc(f.origin_country) || 'Unknown'}</div>
         <div class="panel-divider"></div>
         <div id="route-info" style="font-size:12px;color:var(--muted);margin-bottom:10px">fetching route...</div>
         <div class="panel-divider"></div>

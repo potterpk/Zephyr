@@ -9,7 +9,6 @@ function clearPath() {
 
 function predictedPath(f) {
     if (!f.heading || !f.velocity) return null
-    const rad = (f.heading - 90) * (Math.PI / 180)
     const dist = (f.velocity * 600) / 111320
     const endLat = f.latitude + dist * Math.sin((90 - f.heading) * Math.PI / 180)
     const endLon = f.longitude + dist * Math.cos((90 - f.heading) * Math.PI / 180)
@@ -33,7 +32,7 @@ async function drawPath(flight) {
     try {
         const res = await fetch(`/tracks/${flight.icao24}`)
         const data = await res.json()
-if (!data.path?.length) return
+        if (!data.path?.length) return
 
         const coords = data.path.map(p => [p.lat, p.lon])
         const track = L.polyline(coords, {
@@ -43,7 +42,7 @@ if (!data.path?.length) return
         }).addTo(map)
         layers.push(track)
     } catch (e) {
-        console.log('no track data', e)
+        console.error('no track data', e)
     }
 }
 
