@@ -45,6 +45,10 @@
     font-size: 10px;
 }
 
+[data-theme="light"] .leaflet-control-attribution {
+    background: rgba(232, 237, 245, 0.85) !important;
+}
+
 .leaflet-control-attribution a {
     color: var(--muted) !important;
 }

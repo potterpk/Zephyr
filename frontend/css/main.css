@@ -101,7 +101,6 @@ html, body {
 }
 
 #theme-toggle {
-    margin-left: auto;
     background: none;
     border: 1px solid var(--border);
     border-radius: 6px;
