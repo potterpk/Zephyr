@@ -1,6 +1,6 @@
 # Zephyr
 
-A local flight tracker that actually looks good. Runs entirely on your machine — no accounts, no subscriptions, no ads.
+A local flight tracker that actually looks good:) Runs entirely on your machine...
 
 ---
 
