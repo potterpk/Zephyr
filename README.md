@@ -9,7 +9,7 @@ A local flight tracker that actually looks good:) Runs entirely on your machine.
 - Shows every flight currently in the air, worldwide
 - Click any plane to see altitude, speed, heading, route, and aircraft type
 - Draws the actual flight path the plane has flown + a predicted line ahead
-- Updates every 15 seconds automatically
+- Updates every 60 seconds automatically
 - Search by callsign to jump straight to a flight
 - Weather radar overlay (precipitation)
 - Dark and light mode
@@ -49,8 +49,8 @@ Without an account, OpenSky limits you to around 400 requests per day. If you ru
 To get 10x more requests, sign up for a free account at [opensky-network.org](https://opensky-network.org/). Then create a `.env` file in the project root:
 
 ```
-OPENSKY_USER=your_username
-OPENSKY_PASS=your_password
+OPENSKY_CLIENT_ID=your_client_id
+OPENSKY_CLIENT_SECRET=your_client_secret
 ```
 
 The `.env` file is gitignored so your credentials will never be pushed to GitHub. Each person who clones the repo needs to create their own `.env`.
@@ -74,7 +74,7 @@ The `.env` file is gitignored so your credentials will never be pushed to GitHub
 - Amber line = where it has actually been (last hour from OpenSky)
 - Dashed blue line = predicted path based on current heading and speed
 
-**Weather radar** — hit the 🌧️ button to toggle precipitation radar over the map it won't work if you zoon in too much.
+**Weather radar** — hit the 🌧️ button to toggle precipitation radar over the map. Zoom in too far and the radar tiles won't load.
 
 **Theme** — hit the ☀️ button to switch between dark and light mode.
 
